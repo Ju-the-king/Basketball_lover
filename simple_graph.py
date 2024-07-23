@@ -9,12 +9,14 @@ def plot_data(database):
     :param database : database we are using
     :return:
     """
-
-    data = database[:5][:]
-    player = data["Player"]
-    points = data["PTS"]
-    mp = data["MP"]
+    data = database.head(6)
+    team = data["Nickname"]
+    block = data["BLK"]
+    steal = data["STL"]
+    turnover = data["TOV"]
+    print(turnover)
+    print(block + steal)
     for i in range(5):
-        plt.plot(mp[i], points[i])
-        plt.annotate(player[i], xy=(mp[i], points[i]))
+        plt.scatter(turnover[i], block[i] + steal[i])
+        plt.annotate(team[i], xy=(turnover[i], block[i] + steal[i]+1))
     plt.show()
